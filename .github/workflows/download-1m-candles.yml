@@ -19,5 +19,5 @@ jobs:
   Download-1m-candles:
     runs-on: self-hosted
     steps:
-      - run: echo "yey"
+      - run: python3 ../../Download-1m-candles.py
 
