@@ -17,6 +17,6 @@ for i in range(365):
 
 
 	with zipfile.ZipFile(file_temp_path, 'r') as zip_ref:
-		zip.ref.extractall('./1m_candles/')
+		zip_ref.extractall('./1m_candles/')
 
 	os.remove(file_temp_path)
