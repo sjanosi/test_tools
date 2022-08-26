@@ -1,0 +1,15 @@
+# Runs every night, and downloads the daily 1m chart
+
+name: Download 1m candles
+
+
+on:
+  workflow-dispatch:
+
+
+jobs:
+  Download-1m-candles:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "yey"
+
