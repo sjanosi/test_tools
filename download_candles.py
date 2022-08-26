@@ -10,8 +10,6 @@ for i in range(365):
 	day_date = now - dt.timedelta(days=365-i)
 	file_name = day_date.strftime("ETHUSDC-1m-%Y-%m-%d.zip")
 
-	print(filename)
-
 	file_full_path = "/home/ubuntu/temp/" + file_name
 
 	url = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/1m/" + file_name
