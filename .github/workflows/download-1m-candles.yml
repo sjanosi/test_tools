@@ -2,10 +2,19 @@
 
 name: Download 1m candles
 
-
 on:
   workflow_dispatch:
-  
+    inputs:
+      timeframe:
+        description: "Candle's timeframe"
+        required: true
+        default: '1m' 
+        type: choice
+        options:
+        - 1m
+        - 5m
+        - 15m
+
   schedule:
     - cron: "0 0 * * *
 
