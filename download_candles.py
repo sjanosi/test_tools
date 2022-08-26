@@ -7,7 +7,7 @@ import zipfile
 now = dt.datetime.now()
 
 for i in range(365):
-	day_date = now - dt.timedelta(days=364-i)
+	day_date = now - dt.timedelta(days=366-i)
 	file_name = day_date.strftime("ETHUSDC-1m-%Y-%m-%d.zip")
 
 	file_full_path = "/home/ubuntu/temp/" + file_name
