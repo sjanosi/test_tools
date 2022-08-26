@@ -15,9 +15,6 @@ on:
         - 5m
         - 15m
 
-  schedule:
-    - cron: "0 0 * * *
-
 jobs:
   Download-1m-candles:
     runs-on: ubuntu-latest
