@@ -1,0 +1,16 @@
+# Runs every night, and downloads the daily 1m and 5m charts
+
+name: download candles
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-candles:
+    runs-on: self-hosted
+
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - run: python3 download_candles.py
