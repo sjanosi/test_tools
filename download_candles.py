@@ -8,15 +8,41 @@ now = dt.datetime.now()
 
 for i in range(365):
 	day_date = now - dt.timedelta(days=366-i)
-	file_name = day_date.strftime("ETHUSDC-1m-%Y-%m-%d.zip")
 
-	file_temp_path = "/home/ubuntu/temp/" + file_name
+	temp_file_path = "/home/ubuntu/temp/"
 
-	url = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/1m/" + file_name
-	urllib.request.urlretrieve(url, file_temp_path)
+	full_1m_path = '/home/ubuntu/candles_data/1m_candles/'
+	full_5m_path = '/home/ubuntu/candles_data/5m_candles/'
+
+	# download 1m candles
+	filename_1m_csv = day_date.strftime("ETHUSDC-1m-%Y-%m-%d.csv")
+	filename_1m_zip = day_date.strftime("ETHUSDC-1m-%Y-%m-%d.zip")
 
 
-	with zipfile.ZipFile(file_temp_path, 'r') as zip_ref:
-		zip_ref.extractall('./1m_candles/')
+	if not os.path.exists(full_1m_path + filename_1m_csv):
+		temp_zip_file = file_temp_path + filename_1m_zip
 
-	os.remove(file_temp_path)
+		url_1m = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/1m/" + filename_1m_zip
+		urllib.request.urlretrieve(url_1m, temp_zip_file)
+
+		with zipfile.ZipFile(temp_zip_file, 'r') as zip_ref:
+			zip_ref.extractall(full_1m_path + filename_1m_csv)
+
+		os.remove(temp_zip_file)
+
+
+	# download 5m candles
+	filename_5m_csv = day_date.strftime("ETHUSDC-5m-%Y-%m-%d.csv")
+	filename_5m_zip = day_date.strftime("ETHUSDC-5m-%Y-%m-%d.zip")
+
+
+	if not os.path.exists(full_5m_path + filename_5m_csv):
+		temp_zip_file = file_temp_path + filename_5m_zip
+
+		url_5m = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/5m/" + filename_5m_zip
+		urllib.request.urlretrieve(url_5m, temp_zip_file)
+
+		with zipfile.ZipFile(temp_zip_file, 'r') as zip_ref:
+			zip_ref.extractall(full_5m_path + filename_5m_csv)
+
+		os.remove(temp_zip_file)
