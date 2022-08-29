@@ -7,7 +7,7 @@ import zipfile
 now = dt.datetime.now()
 
 for i in range(365):
-	day_date = now - dt.timedelta(days=367-i)
+	day_date = now - dt.timedelta(days=365-i)
 
 	temp_file_path = "/home/ubuntu/temp/"
 
