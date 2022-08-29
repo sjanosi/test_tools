@@ -26,8 +26,10 @@ for i in range(365):
 		url_1m = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/1m/" + filename_1m_zip
 		urllib.request.urlretrieve(url_1m, temp_zip_file)
 
+
+
 		with zipfile.ZipFile(temp_zip_file, 'r') as zip_ref:
-			zip_ref.extractall(full_1m_path + filename_1m_csv)
+			zip_ref.extractall(full_1m_path)
 
 		os.remove(temp_zip_file)
 
@@ -43,6 +45,6 @@ for i in range(365):
 		urllib.request.urlretrieve(url_5m, temp_zip_file)
 
 		with zipfile.ZipFile(temp_zip_file, 'r') as zip_ref:
-			zip_ref.extractall(full_5m_path + filename_5m_csv)
+			zip_ref.extractall(full_5m_path)
 
 		os.remove(temp_zip_file)
