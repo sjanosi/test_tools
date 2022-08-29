@@ -20,7 +20,7 @@ for i in range(365):
 
 
 	if not os.path.exists(full_1m_path + filename_1m_csv):
-		temp_zip_file = file_temp_path + filename_1m_zip
+		temp_zip_file = temp_file_path + filename_1m_zip
 
 		url_1m = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/1m/" + filename_1m_zip
 		urllib.request.urlretrieve(url_1m, temp_zip_file)
@@ -37,7 +37,7 @@ for i in range(365):
 
 
 	if not os.path.exists(full_5m_path + filename_5m_csv):
-		temp_zip_file = file_temp_path + filename_5m_zip
+		temp_zip_file = temp_file_path + filename_5m_zip
 
 		url_5m = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/5m/" + filename_5m_zip
 		urllib.request.urlretrieve(url_5m, temp_zip_file)
