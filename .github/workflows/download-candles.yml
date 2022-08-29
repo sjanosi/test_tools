@@ -16,3 +16,7 @@ jobs:
       - run: python3 download_candles.py
 
       - uses: stefanzweifel/git-auto-commit-action@v4
+
+      - run: |
+          cp ./candles_1m/* /home/ubuntu/candles_data/candles_1m/
+          cp ./candles_5m/* /home/ubuntu/candles_data/candles_5m/
