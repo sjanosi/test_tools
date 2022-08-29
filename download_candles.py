@@ -12,8 +12,8 @@ for i in range(365):
 
 	temp_file_path = "/home/ubuntu/temp/"
 
-	full_1m_path = '/home/ubuntu/candles_data/1m_candles/'
-	full_5m_path = '/home/ubuntu/candles_data/5m_candles/'
+	full_1m_path = './candles_1m/'
+	full_5m_path = './candles_5m/'
 
 	# download 1m candles
 	filename_1m_csv = day_date.strftime("ETHUSDC-1m-%Y-%m-%d.csv")
@@ -31,8 +31,6 @@ for i in range(365):
 
 		os.remove(temp_zip_file)
 
-		shuitl.copyfile(full_1m_path + filename_1m_csv, "./candles_1m/" + filename_1m_csv)
-
 	# download 5m candles
 	filename_5m_csv = day_date.strftime("ETHUSDC-5m-%Y-%m-%d.csv")
 	filename_5m_zip = day_date.strftime("ETHUSDC-5m-%Y-%m-%d.zip")
@@ -48,5 +46,3 @@ for i in range(365):
 			zip_ref.extractall(full_5m_path + filename_5m_csv)
 
 		os.remove(temp_zip_file)
-
-		shuitl.copyfile(full_5m_path + filename_5m_csv, "./candles_5m/" + filename_5m_csv)
