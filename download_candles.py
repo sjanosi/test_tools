@@ -1,5 +1,6 @@
 import datetime as dt
 import os
+import shutil
 import urllib.request
 import zipfile
 
@@ -30,6 +31,7 @@ for i in range(365):
 
 		os.remove(temp_zip_file)
 
+		shuitl.copyfile(full_1m_path + filename_1m_csv, "./candles_1m/" + filename_1m_csv)
 
 	# download 5m candles
 	filename_5m_csv = day_date.strftime("ETHUSDC-5m-%Y-%m-%d.csv")
@@ -46,3 +48,5 @@ for i in range(365):
 			zip_ref.extractall(full_5m_path + filename_5m_csv)
 
 		os.remove(temp_zip_file)
+
+		shuitl.copyfile(full_5m_path + filename_5m_csv, "./candles_5m/" + filename_5m_csv)
