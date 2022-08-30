@@ -3,6 +3,9 @@
 name: download candles
 
 on:
+  scehdule:
+    - cron: '0 0 * * *'
+
   workflow_dispatch:
 
 jobs:
