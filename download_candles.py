@@ -1,48 +1,55 @@
-import datetime as dt
+from datetime import date, timedelta
 import os
-import shutil
 import urllib.request
 import zipfile
 
+# the symbol pairs to download candles for
+symbols = ['ETHBUSD']
 
-now = dt.datetime.now()
+# the timeframes to download candles for
+timeframes = ['1m', '5m', '15m', '1h']
 
-for i in range(365):
-	day_date = now - dt.timedelta(days=365-i)
+# binance URL
+binance_url = "https://data.binance.vision/data/spot/daily/klines"
 
-	temp_file_path = "/home/ubuntu/temp/"
+# the home directory
+home_dir = "/home/ubuntu/klines"
 
-	full_1m_path = './candles_1m/'
-	full_5m_path = './candles_5m/'
+# get the current day
+today = date.today()
+# get the first day to start downloading candles
+first_day = today - timedelta(365)
 
-	# download 1m candles
-	filename_1m_csv = day_date.strftime("ETHUSDC-1m-%Y-%m-%d.csv")
-	filename_1m_zip = day_date.strftime("ETHUSDC-1m-%Y-%m-%d.zip")
+# download candles files for each symbol and timeframe
+for symbol in symbols:
+	# create symbol directory if it does not exist
+	symbol_dir = f"{home_dir}/{symbol}"
+	if not os.path.exists(symbol_dir):
+		os.makedirs(symbol_dir)
+	# get candles files for each timeframe
+	for timeframe in timeframes:
+		# create timeframe directory if it does not exist
+		timeframe_dir = f"{symbol_dir}/{timeframe}"
+		if not os.path.exists(timeframe_dir):
+			os.makedirs(timeframe_dir)
 
+		# download all daily files
+		current_day = first_day
+		while current_day != today:
+			# the file to download
+			filename = current_day.strftime(f"{symbol}-{timeframe}-%Y-%m-%d")
 
-	if not os.path.exists(full_1m_path + filename_1m_csv):
-		temp_zip_file = temp_file_path + filename_1m_zip
+			# check if file exist already
+			if not os.path.exists(f"{timeframe_dir}/{filename}.csv"):
+				# download the file
+				url = f"{binance_url}/{symbol}/{timeframe}/{filename}.zip"
+				local_zipfile = f"{timeframe_dir}/{filename}.zip"
+				urllib.request.urlretrieve(url, local_zipfile)
+				# extract the zip archive
+				with zipfile.ZipFile(local_zipfile, 'r') as zip_ref:
+					zip_ref.extractall(timeframe_dir)
+				# delete the zip archive
+				os.remove(local_zipfile)
 
-		url_1m = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/1m/" + filename_1m_zip
-		urllib.request.urlretrieve(url_1m, temp_zip_file)
-
-		with zipfile.ZipFile(temp_zip_file, 'r') as zip_ref:
-			zip_ref.extractall(full_1m_path)
-
-		os.remove(temp_zip_file)
-
-	# download 5m candles
-	filename_5m_csv = day_date.strftime("ETHUSDC-5m-%Y-%m-%d.csv")
-	filename_5m_zip = day_date.strftime("ETHUSDC-5m-%Y-%m-%d.zip")
-
-
-	if not os.path.exists(full_5m_path + filename_5m_csv):
-		temp_zip_file = temp_file_path + filename_5m_zip
-
-		url_5m = "https://data.binance.vision/data/spot/daily/klines/ETHUSDC/5m/" + filename_5m_zip
-		urllib.request.urlretrieve(url_5m, temp_zip_file)
-
-		with zipfile.ZipFile(temp_zip_file, 'r') as zip_ref:
-			zip_ref.extractall(full_5m_path)
-
-		os.remove(temp_zip_file)
+		# increment the current day
+		current_day += timedelta(1)
