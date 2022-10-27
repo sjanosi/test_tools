@@ -38,7 +38,6 @@ for symbol in symbols:
 		while current_day != today:
 			# the file to download
 			filename = current_day.strftime(f"{symbol}-{timeframe}-%Y-%m-%d")
-
 			# check if file exist already
 			if not os.path.exists(f"{timeframe_dir}/{filename}.csv"):
 				# download the file
@@ -50,6 +49,5 @@ for symbol in symbols:
 					zip_ref.extractall(timeframe_dir)
 				# delete the zip archive
 				os.remove(local_zipfile)
-
-		# increment the current day
-		current_day += timedelta(1)
+			# increment the current day
+			current_day += timedelta(1)
