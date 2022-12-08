@@ -10,7 +10,7 @@ symbols = ['ETHBUSD']
 timeframes = ['1m', '5m', '15m', '1h']
 
 # binance URL
-binance_url = "https://data.binance.vision/data/spot/daily/klines"
+binance_url = "https://data.binance.vision/?prefix=data/spot/daily/klines"
 
 # the home directory
 home_dir = "/home/ubuntu/klines"
