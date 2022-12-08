@@ -17,6 +17,7 @@ home_dir = "/home/ubuntu/klines"
 
 # get the current day
 today = date.today()
+yesterday = today - timedelta(1)
 # get the first day to start downloading candles
 first_day = today - timedelta(365)
 
@@ -35,7 +36,7 @@ for symbol in symbols:
 
 		# download all daily files
 		current_day = first_day
-		while current_day != today:
+		while current_day != yesterday:
 			# the file to download
 			filename = current_day.strftime(f"{symbol}-{timeframe}-%Y-%m-%d")
 			# check if file exist already
